@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.wizion.androidarchitecturecomponentsandjetpack.dagger_hilt.HiltMainActivity
 import com.wizion.androidarchitecturecomponentsandjetpack.databinding.ActivityMainBinding
 import com.wizion.androidarchitecturecomponentsandjetpack.databinding.databinding1.DataBindingActivity
 import com.wizion.androidarchitecturecomponentsandjetpack.databinding.databinding2.DataBindingAndViewModel
@@ -15,6 +16,7 @@ import com.wizion.androidarchitecturecomponentsandjetpack.mvvm.diff_util.DiffUti
 import com.wizion.androidarchitecturecomponentsandjetpack.mvvm.mvvm_using_retrofit_and_room.MvvmRetrofitRoomActivity
 import com.wizion.androidarchitecturecomponentsandjetpack.mvvm.mvvm_using_room.MvvmMainActivity
 import com.wizion.androidarchitecturecomponentsandjetpack.mvvm.retrofit.RetrofitActivity
+import com.wizion.androidarchitecturecomponentsandjetpack.services.ServiceActivity
 import com.wizion.androidarchitecturecomponentsandjetpack.viewmodel.basics.ViewModelActivity
 import com.wizion.androidarchitecturecomponentsandjetpack.viewmodel.quotesapp.QuotesActivity
 
@@ -26,6 +28,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
 
+
+        binding.btnService.setOnClickListener {
+            startActivity(Intent(this, ServiceActivity::class.java))
+        }
+
+        binding.btnHiltApp.setOnClickListener {
+            startActivity(Intent(this, HiltMainActivity::class.java))
+        }
 
         binding.btnMvvmRetrofitRoom.setOnClickListener {
             startActivity(Intent(this, MvvmRetrofitRoomActivity::class.java))

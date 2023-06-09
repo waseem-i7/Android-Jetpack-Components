@@ -2,8 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="true" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
         android:name=".dagger_hilt.BaseApp"
@@ -15,16 +24,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidArchitectureComponentsAndJetpack"
         tools:targetApi="31">
+
+
+
+        <receiver android:name=".services.SMSReceiver"
+            android:permission="android.permission.BROADCAST_SMS"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".services.MyBroadcastReceiver"/>
+
+        <service android:name=".services.MusicService"/>
+        <activity
+            android:name=".services.ServiceActivity"
+            android:exported="false" />
+
+
+
         <activity
             android:name=".dagger_hilt.HiltMainActivity"
-            android:exported="true" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".mvvm.mvvm_using_retrofit_and_room.MvvmRetrofitRoomActivity"
             android:exported="false" />
@@ -67,7 +89,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

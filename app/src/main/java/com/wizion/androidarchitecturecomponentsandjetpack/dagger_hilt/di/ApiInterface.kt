@@ -17,5 +17,4 @@ interface ApiInterface {
 
     @GET(Constants.POST)
     suspend fun getPostByCategory(@Query("categories") category : String) : Response<PostModel>
-
 }
